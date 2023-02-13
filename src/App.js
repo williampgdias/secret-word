@@ -70,8 +70,32 @@ function App() {
 
   // PROCESS THE LETTER INPUT
   const verifyLetter = (letter) => {
-    console.log(letter);
+    const normalizedLetter = letter.toLowerCase();
+
+    // CHECK IF LETTER HAS ALREADY BEEN USED
+    if (
+      guessedLetters.includes(normalizedLetter) ||
+      wrongLetters.includes(normalizedLetter)
+    ) {
+      return;
+    }
+
+    // PUSH GUESSED LETTER OR REMOVE A GUESS
+    if (letters.includes(normalizedLetter)) {
+      setGuessedLetters((actualGuessedLetter) => [
+        ...actualGuessedLetter,
+        normalizedLetter,
+      ]);
+    } else {
+      setWrongLetters((actualWrongLetter) => [
+        ...actualWrongLetter,
+        normalizedLetter,
+      ]);
+    }
   };
+
+  console.log(guessedLetters);
+  console.log(wrongLetters);
 
   // RESTARTS THE GAME
   const retry = () => {
